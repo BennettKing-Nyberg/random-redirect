@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Redirect</title>
+    <script>
+        // Define the two experiment URLs with placeholders for SONA participant ID
+        const urls = [
+            "https://run.pavlovia.org/DStephenLindsay/test_delete/?participant=${participant}",
+            "https://run.pavlovia.org/DStephenLindsay/test2/?participant=${participant}"
+        ];
+        // Extract the participant ID from the URL (SONA appends it as 'participant')
+        const queryParams = new URLSearchParams(window.location.search);
+        const participantId = queryParams.get('participant');
+        if (participantId) {
+            // Replace the placeholder with the participant ID
+            const randomUrl = urls[Math.floor(Math.random() * urls.length)].replace("${participant}", participantId);
+            // Redirect to the randomly selected URL
+            window.location.href = randomUrl;
+        } else {
+            // If no participant ID is found, show an error message
+            document.body.innerHTML = "<p>Participant ID not found. Please contact the researcher.</p>";
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting you to the experiment...</p>
+</body>
+</html>
